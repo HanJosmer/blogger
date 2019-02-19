@@ -16,8 +16,10 @@
 <br><br>
 <%= render partial: 'comments/form' %><br><br> 
 <%= link_to "<< Back to articles list", articles_path %><br>
-<%= link_to ">> Edit", edit_article_path(@article) %><br>
-<%= link_to "<< Delete", article_path(@article), method: :delete, data: {confirm: "Do you really, really want to delete this article?"} %><br>
-<br><br>
+<% if logged_in? %>
+  <%= link_to ">> Edit", edit_article_path(@article) %><br>
+  <%= link_to "<< Delete", article_path(@article), method: :delete, data: {confirm: "Do you really, really want to delete this article?"} %><br>
+  <br><br>
+<% end %>
 <h3>Comments (<%= @article.comments.size %>)</h3>
 <%= render partial: 'articles/comment', collection: @article.comments %>
