@@ -5,10 +5,14 @@ class ArticlesController < ApplicationController
     
     def index
         @articles = Article.all
+
+        # top 3 articles
+        @top_articles = @articles.order(page_views: :desc).limit(3)
     end
 
     def show
         @article = Article.find(params[:id])
+        @article.add_page_view
 
         @comment = Comment.new
         @comment.article_id = @article.id

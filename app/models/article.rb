@@ -14,4 +14,13 @@ class Article < ApplicationRecord
         new_or_found_tags = tag_names.collect { |name| Tag.find_or_create_by(name: name) }
         self.tags = new_or_found_tags
     end
+
+    def add_page_view
+        if self.page_views == nil
+            self.page_views = 0
+        end
+
+        self.page_views = self.page_views + 1
+        self.save
+    end
 end
